@@ -1,0 +1,46 @@
+% paramcausescomps.tex
+
+\begin{figure}[htbp!]
+    \scriptsize
+    \centering
+    \begin{tikzpicture}
+    \pgfplotsset{set layers}
+    \begin{axis}[comright]
+        \addplot[color=black, mark=square]
+            coordinates {
+            (1, 413)
+            (20, 353)
+            (40, 307)
+            (60,  273)
+            (80,  243)
+            (100, 215)
+            (150, 187)
+            (200, 168)
+            (300, 118)
+            (400, 93)
+            (500, 73)
+            };
+            \label{pgfplots:cmp}
+    \end{axis}
+    %
+    \begin{axis}[comleft]
+        \addplot[color=black, mark=*]
+             coordinates {
+             (1, 165.318)
+             (20, 97.436)
+             (40, 77.945)
+             (60, 66.287)
+             (80, 53.647)
+             (100, 47.181)
+             (150, 35.339)
+             (200, 27.750)
+             (300, 19.043)
+             (400, 13.630)
+             (500, 10.445)
+             };
+        \label{pgfplots:cause}
+    \end{axis}
+    \end{tikzpicture}
+    \caption{\scriptsize Number of causes and companies in the data set as a function of the minimum number of donations per user during the 2-year interval in the donations-2 data set.}
+    \label{fig:number_of_companies_causes_vs_number_donations}
+\end{figure}

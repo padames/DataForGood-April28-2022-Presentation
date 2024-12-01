@@ -1,0 +1,640 @@
+%% Author: 		Pablo Adames
+%% Date:			June 16, 2013 (first created as template-contents.tex)
+%%				Nov 6, 2013 (second version for Schlumberger )
+%%				Nov 15, 2013 (handout version for Schlumberger)
+%%				Apr 03, 2014 (first version TUFFP presentation, added documentation on usage)
+%%              Aug 09, 2019 (CalgaryR meetup)
+%%              Mar 02, 2022 (CDMA2022 paper)
+%%
+%% File:			ComparisonFrigssStFergusFlowModelsTUFFPApr082014.tex
+%%
+%% Notes:		This file is compilable using LuaLaTeX and TeXlive for best results
+%%
+%%				This file is to be the placeholder of
+%%				the structure of either a presentation with
+%%				fully functional slides or an article with the slides
+%%				plus comments for completeness.
+%%
+%%				The presentation may have animations, movies, and other features
+%%				that are meant to be shown in full screen mode.
+%%
+%%				The article is supposed to be the documentation accompanying the
+%%				full featured presentation. It will have all the sildes in smaller
+%%				size for reference plus all the contextual information to
+%%				allow interpretation of the presentation slides in a logical
+%%				sequence from beginning to end.
+
+%% Usage:		First compile the following file using LuaLaTeX and TexLive:
+
+%%				`PresentationComparisonFrigssStFergusFlowModelsVMGNov2014.beamer.tex'
+%%
+%%					\documentclass[	ignorenonframetext, boxes, xcolor=dvipsnames, 14pt]{beamer}
+%%					\usepackage{multimedia}
+%%					\def\beamerforarticle{n}
+%%					\input{PresentationComparisonFrigssStFergusFlowModelsVMGNov2014}
+
+%%				This will generate the PDF from the beamer presentation LaTeX markup
+%%				Then compile the following file using LuaLaTeX and TexLive:
+
+%%				`PresentationComparisonFrigssStFergusFlowModelsVMGNov2014.article.tex'
+
+%%					\documentclass[12pt,letterpaper]{article}
+%%					\usepackage[activeospeccharacters]{beamerarticle}
+%%					\usepackage[top=2cm,bottom=2cm,left=2.5cm,right=2cm]{geometry}
+%%					\usepackage[labelfont=bf,textfont={sl,bf},lofdepth,lotdepth]{subfig}
+%%					\setjobnamebeamerversion{PresentationComparisonFrigssStFergusFlowModelsVMGNov2014.beamer}
+%%					\input{PresentationComparisonFrigssStFergusFlowModelsVMGNov2014}
+%%
+%%				That will produce the PDF as an article with the slides
+%%				in it as scaled down graphics.
+%%				Note: you may have to edit the file:
+%%				`PresentationComparisonFrigssStFergusFlowModelsTUFFPApr082014.beamer.snm'
+%%				to number the repeated slide numbers of consecutive overlayed slides to
+%%				be able to repfer to them appropriately in the article version.
+%\usetheme{default} % will use "boxes" as specified in the '\documentclass[]{}' command
+%\usetheme{Boadilla}% ok
+\usetheme{CambridgeUS}% best (mod template by raising logos to allow for footnote template)
+%\usetheme{EastLansing} % green version of 'CambridgeUS'
+%\usetheme{Goettingen}% pretty good if right side bar is ok...would have to remove the top navigation from slide Configuration
+%\usetheme{Malmoe}% dark colours, after changing configuration slides looks better
+%\usetheme{Marburg}% side bar, strong colours, similar to 'Goettingen'
+%\usetheme{Montpellier}%LOVE IT, very descrete top navigation guide
+%\usetheme{Szeged}% LOVE IT TOO, similar to Montpellier but footnote and top navigation has different structure
+%\usetheme{Warsaw}% Singapore, Szeged, Warsaw
+%\usepackage[autoplay,draft]{animate}%set final locally at each animation
+\usepackage[export]{adjustbox}
+\usepackage[autoplay,final]{animate}%set draft locally at each animation
+\usepackage{caption}
+\captionsetup[figure]{font={small,it,bf},labelfont={small,it,bf}}
+\usepackage{tikz} % to make circled numbers in personal commands file and data flow diagram
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.text,decorations.shapes, arrows.meta, decorations.pathreplacing,decorations.pathmorphing}
+\usetikzlibrary{bending,arrows.meta,patterns,calc,fit}
+\usepackage{tkz-euclide}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.9}
+\pgfplotsset{donleft/.style={%
+        scale only axis,
+        xmajorgrids,
+        xlabel = {Minimum number of donations per user},
+        axis y line*=left,
+        ylabel style = {align=center},
+        ylabel     = {Transactions, $\times$ 10\textsuperscript{6} \ref{pgfplots:nt}},
+        xtick      = {1,50,100,200, 300,400,500},
+        ytick      = {0,2,5,10,15,20,25},
+        width = 6.2cm }}
+\pgfplotsset{donlogright/.style={%
+        log y ticks with fixed point,
+        scale only axis,
+        axis x line=none,
+        axis y line*=right,
+        ylabel style = {align=center},
+        ylabel       = {Users, $\times$ 10\textsuperscript{3} \ref{pgfplots:users}},
+        xtick      = {1,50,100,200, 300,400,500},
+        ytick      = {1,10,100,1000},
+        width = 6.2cm }}
+\pgfplotsset{comleft/.style={%
+        scale only axis,
+        axis x line=none,
+        axis y line*=left,
+        ylabel style = {align=center},
+        ylabel       = {Causes, $\times$ 10\textsuperscript{3} \ref{pgfplots:cause}},
+        ytick      = {0,25,50,75,100,125,150,175},
+        xtick      = {1,50,100,200, 300,400,500},
+        width = 6.2cm }}
+\pgfplotsset{comright/.style={%
+        scale only axis,
+        xmajorgrids,
+        xlabel = {Minimum number of donations per user},
+        axis y line*=right,
+        ylabel style = {align=center},
+        ylabel     = {Companies, \ref{pgfplots:cmp}},
+        xtick      = {1,50,100,200, 300,400,500},
+        ytick      = {0,50,100,150,200,250,300,350,400},
+        width = 6.2cm }}
+\pgfplotsset{cntyleft/.style={%
+        scale only axis,
+        grid       = both,
+        xlabel     = {Minimum number of donations per user},
+        ylabel style = {align=center},
+        ylabel     = {User countries, \ref{pgfplots:usrcnty}},
+        xtick      = {1,50,100,200, 300,400,500},
+        width = 6.2cm }}
+\pgfplotsset{mapfigs/.style={%
+        grid = both,
+        width = 6.75cm,
+        ylabel = {MAP, \%},
+        xlabel = {Top-k recommendations},
+        ymin = 5,
+        ymax = 35,
+        xtick = {3,4,...,11},
+        ytick = {5,10,15,20,25,30,35}}}
+
+
+\usepackage{pstricks,pst-plot}
+% \usetikzlibrary{shapes,arrows,decorations.markings,decorations.pathmorphing,decorations.text}
+% \usetikzlibrary{bending,arrows.meta,patterns,calc,fit}
+% \usetikzlibrary{decorations.pathreplacing}
+%\usetikzlibrary{positioning-plus,node-families}
+% \usepackage{tkz-euclide}
+%\usetikzlibrary{mindmap}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{helvet}
+\usepackage{fontspec} % Please compile using LuaLaTeX if using these two lines...
+%\setmainfont{Arial} % otherwise switch to the previous helvet package and use pdfLaTeX
+%\usepackage{multimedia}
+\mode<article>{ \usepackage{paralist} }
+\usepackage{pgfkeys }
+\usepackage{fancybox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{tabularx}
+\usepackage{booktabs}	  	%design of table, has an excellent documentation
+\usepackage{multirow}
+\usepackage{calc} % to combine measures in textpos commands for instance
+\usepackage[absolute,overlay]{textpos}
+% \usepackage[texcoord,grid,gridcolor=red!10,subgridcolor=green!10,gridunit=pt]{eso-pic}
+\usepackage{fontawesome}
+\usepackage{savesym}
+\savesymbol{checkmark}
+\usepackage{dingbat}
+\restoresymbol{DINGBAT}{checkmark} % avoids collision with definition in ams package
+
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage{threeparttable}
+\usepackage{microtype} % for awesome spacing and a pleasant look
+\usepackage{dblfloatfix}
+\usepackage[ruled,vlined]{algorithm2e}
+
+%\usepackage[absolute,overlay,showboxes]{textpos}
+\usepackage{hyperref}
+%\definecolor{slbheadings}{RGB}{0,51,102}%blue
+\definecolor{slbheadings}{RGB}{0.07,0.32,0.30}%deep jungle green (https://rgbcolorcode.com/color/4DA6FF)
+
+\hypersetup{%
+    colorlinks=false,
+    linkbordercolor = {blue!20!black!60!red},
+    breaklinks,
+    linkcolor=blue!20!black!60!red,
+    urlcolor=slbheadings,
+    anchorcolor=blue!20!black!60!red,
+    citecolor=blue!20!black!60!red}
+\hypersetup{%
+    pdftitle={Recommendation System to Suggest Charities without Explicit User Profiles Using Dual-AutoEncoders},
+    pdfauthor={Pablo E. Adames},
+    pdfsubject={A presentation for Data4Good Meetup Apr 28 2022},
+    pdfcreator={\LaTeX\ with package \flqq hyperref\frqq and document class \flqq beamer \frqq},
+    pdfkeywords={recommendations, auto-encoders, donations, relevance},
+    pdfproducer={LuaLaTeX}%
+}
+
+
+\definecolor{headings}{RGB}{0,0,0}%Black
+\definecolor{fgbox}{rgb}{0.2,0,0.2} % dark midnight blue
+\definecolor{bgbox}{rgb}{0,0.4,0.6}
+%\definecolor{text}{rgb}{0,0.2, 0.4}
+\definecolor{text}{rgb}{0.07,0.32,0.30} % deep jungle green
+
+
+\definecolor{amazon}{rgb}{0.23,0.48,0.34} %3A7A57 Sea green
+\definecolor{amazonlight}{rgb}{0.62,0.74,0.67}
+\definecolor{amazonComp}{rgb}{0.48,0.23,0.37}
+
+
+
+\mode<article>{
+    \usepackage[automark,headsepline,footsepline]{scrlayer-scrpage}
+    \setheadsepline{2pt}[\color{orange}]
+    \setfootsepline{2pt}[\color{orange}]
+}
+
+\mode<beamer>{
+    \setbeamercovered{transparent}
+    \input{ShortPages/slideConfiguration}
+    % \setbeamertemplate{title page}[default]
+    \setbeamercolor{normal text}{fg=text,bg=white}
+    \setbeamercolor{alerted text}{fg=amazonComp}
+    \setbeamercolor{example text}{fg=green}
+
+%    \setbeamercolor{background canvas}{fg=myforeground, bg=white}
+%    \setbeamercolor{background}{fg=myforeground, bg=mybackground}
+
+    \setbeamercolor{palette primary}{fg=black, bg=amazonlight}
+    \setbeamercolor{palette secondary}{fg=black, bg=amazonComp}
+    \setbeamercolor{palette tertiary}{fg=black, bg=amazon}
+
+    \setbeamercolor{frametitle}{fg=amazon}
+    \setbeamercolor{title}{fg=amazonlight}
+
+    \setbeamercolor{block title}{fg=amazonComp}
+    \setbeamercolor{block subtitle}{fg=amazonlight}
+    \setbeamercolor{box highlight}{fg=amazon,bg=amazonlight}
+    \setbeamercolor{section in toc}{fg=amazonComp}
+    \setbeamercolor{subsection in toc}{fg=amazonComp}
+
+
+    \setbeamerfont{title}{size=\Large,series=\bfseries}
+    \setbeamerfont{frametitle}{size=\large,series=\bfseries}
+    \setbeamerfont{section in toc}{series=\bfseries}
+
+    \setbeamercolor{enumerate item}{ bg=amazon}
+    \setbeamercolor{item projected}{ bg=amazon, fg=white}
+    \usesubitemizeitemtemplate{}
+    \setbeamercolor{postit}{fg=black,bg=yellow}
+}
+
+\mode<article>{
+    \title{Improving Relevance in a Recommendation System to Suggest Charities}%
+    % \subtitle{}
+    \author{Pablo Adames, Sourabh Mokhasi}
+    \date{March 03, 2022}
+}
+\mode<beamer>{
+    \title{Recommendations for Charities}%
+    % \subtitle{}
+    \author{Adames et al.}
+    \date{April 28, 2022}
+}
+
+
+
+\input{Common/personalCommands}
+
+\mode<article>{
+    \usepackage[automark,headsepline,footsepline]{scrlayer-scrpage}
+    \setheadsepline{2pt}[\color{orange}]
+    \setfootsepline{2pt}[\color{orange}]
+    \setlength{\belowcaptionskip}{-3ex}
+}
+
+
+
+\begin{document}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.25ex plus0.25ex minus0.2ex}
+
+%-------------------------TITLE PAGE--------------------------------------------
+\mode<article>{
+\maketitle
+}
+
+\mode<beamer>{
+\usebackgroundtemplate{%
+\includegraphics[width=\paperwidth,height=\paperheight]{GraphicFiles/MeetUpData4GoodEmptyBackground.png} %10.7 x 8.0 inches
+}}% this background gets applied for now on in every frame unless otherwise specified,
+% e.g. by using the option [plain] in the frame environment
+
+\mode<beamer>{
+\frame[plain]{
+    \label{titlepage}
+    \input{ShortPages/titleSlide}
+}}
+
+%% removed at the suggestion of audience to webinar practice on Nov 1, 2013
+%% It does not add any information and it can be distracting
+
+\mode<beamer>{
+\AtBeginSection[]
+{
+	\begin{frame}{Table of Contents}
+		\scriptsize
+		\tableofcontents[currentsection]
+	\end{frame}
+}}
+
+
+%----------------------------------------------------------------------------------------------------------
+\mode<all>{
+    \usebackgroundtemplate{%
+      \includegraphics[width=\paperwidth,height=\paperheight]{GraphicFiles/MeetUpData4GoodBackground.png}%
+    }% this background gets applied for now on in every frame unless otherwise specified,
+    % e.g. by using the option [plain] in the frame environment
+}
+
+
+\section{Introduction}
+
+
+    \subsection{Context}
+    \label{subsec:somecontext}
+
+   \mode<beamer>{
+   \begin{frame}
+        \frametitle{Everyday recommendations 1}
+        \label{whatAreRecsUser}
+        \input{ShortPages/recommendationsUserBased}
+   \end{frame}}
+
+
+   \mode<beamer>{
+   \begin{frame}
+       \frametitle{Everyday recommendations 2}
+       \label{whatAreRecsItem}
+       \input{ShortPages/recommendationsItemBased}
+   \end{frame}}
+
+   \subsection{Algorithms}
+   \label{subsec:algorithms}
+
+   \mode<beamer>{
+   \begin{frame}
+        \frametitle{Recommendation system algorithms - data}
+        \label{howAutomateRecs1}
+        \input{ShortPages/recSysAlgorithms1}
+    \end{frame}}
+
+   \mode<beamer>{
+    \begin{frame}
+        \frametitle{Recommendation system algorithms - tasks}
+        \label{howAutomateRecs2}
+        \input{ShortPages/recSysAlgorithms2}
+    \end{frame}}
+
+
+    \subsection{Algorithm Implementations}
+    \label{subsec::algoimplementations}
+
+   \mode<beamer>{
+    \begin{frame}
+        \frametitle{Algorithm implementations - elements}
+        \label{algoimplementelem}
+        \input{ShortPages/algoImplementationElements}
+    \end{frame}}
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{CF algorithm with dual-autoencoders}
+        \label{cfalgowithdualautoencoders}
+        \input{ShortPages/itemBasedCFWithDualAutoEncoders}
+    \end{frame}}
+
+
+    \subsection{Building a recommendation system}
+    \label{subsec:buildingARecSys}
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{The Machine Learning Project Flow}
+        \label{mlprojectflow}
+        \input{ShortPages/theMLProjectFlow}
+    \end{frame}}
+
+
+    \section{Building the System}
+    \label{sec:ourMLproject}
+
+    \subsection{Project definition}
+    \label{subsec:ourimplementation}
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{Context}
+        \label{context}
+        \input{ShortPages/context}
+    \end{frame}}
+
+
+    \subsection{Previous research}
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{Donations related previous work}
+        \label{previousresearch}
+        \input{ShortPages/previousresearch}
+    \end{frame}}
+
+
+    \subsection{Inductive Bias}
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{Algorithm selection}
+        \label{recAlgoselection}
+        \input{ShortPages/selectionRecAlgo}
+    \end{frame}}
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{ML selection}
+        \label{sparsity}
+        \input{ShortPages/selectionMLsparsitycomplexity}
+    \end{frame}}
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{System metric selection}
+        \label{relevance}
+        \input{ShortPages/selectionRelevanceMetric}
+    \end{frame}}
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{Question}
+        \label{question}
+        \input{ShortPages/slideQuestions}
+    \end{frame}}
+
+    \section{Methodology}
+
+    \subsection{Feature engineering}
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{Generation of features}
+        \label{featuregen}
+        \input{ShortPages/featureeng}
+    \end{frame}}
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{Features}
+        \label{featuresdefinitions}
+        \input{ShortPages/featuredefinitions}
+    \end{frame}}
+
+
+\subsection{Measuring relevance}
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{Data set description}
+        \label{dataset}
+        \input{ShortPages/dataset}
+    \end{frame}}
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{ML metrics}
+        \label{mlmetrics}
+        \input{ShortPages/measuringrelevance}
+    \end{frame}}
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{System performance metrics}
+        \label{sysperformancemetrics}
+        \input{ShortPages/measuringrecperf}
+    \end{frame}}
+
+
+%    \mode<beamer>{
+%    \begin{frame}
+%        \frametitle{MAP}
+%        \label{map}
+%        \input{ShortPages/map}
+%    \end{frame}}
+
+
+
+\section{Results}
+
+
+\subsection{Embedding size}
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{Sensitivity to embedding size}
+        \label{embeddingsizes}
+        \input{ShortPages/embeddingsizes}
+    \end{frame}}
+
+\subsection{Categories Vs. Subcategories}
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{Cause categories Vs. subcategories}
+        \label{catvssubcat}
+        \input{ShortPages/catvssubcat}
+    \end{frame}}
+
+\subsection{User activity}
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{Effect of user activity}
+        \label{useractivity}
+        \input{ShortPages/useractivity}
+    \end{frame}}
+
+
+\subsection{Effect of setting the minimum donations per user}
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{Transactions and users}
+        \label{transacsusers}
+        \input{ShortPages/paramtransacsusers}
+    \end{frame}}
+
+
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{Causes and companies}
+        \label{paramcausescomps}
+        \input{ShortPages/paramcausescomps}
+    \end{frame}}
+
+    \mode<beamer>{
+    \begin{frame}
+        \frametitle{Countries of users}
+        \label{paramcountries}
+        \input{ShortPages/paramcountries}
+    \end{frame}}
+
+
+\section{Conclusions}
+
+
+\mode<beamer>{
+    \begin{frame}
+        \frametitle{Conclusions}
+        \label{conclusionsclassification}
+    \input{ShortPages/conclusions}
+    \end{frame}
+}
+
+\section{Acknowledgements}
+
+\mode<beamer>{
+    \begin{frame}
+        \frametitle{Acknowledgements}
+        \label{acknowledgments}
+    \input{ShortPages/ackwoledgements}
+    \end{frame}
+}
+
+    Thanks to Benevity and MITACS for funding this research and to the University of Calgary the Master of Engineering program in Software Engineering that gave us the principles to tackle this subject.
+
+    %----------------------------------------------------------------------------------------
+    \begin{figure}[!htbp]
+        \begin{center}
+            \framebox{\includeslide[width=0.45\textwidth]{acknowledgments}}
+            \caption{Acknowledgments}
+            \label{fig:ackwoledgements}
+        \end{center}
+    \end{figure}
+    %----------------------------------------------------------------------------------------
+
+%\section*{Additional Support slides}
+%    \mode<all>{
+%        \usebackgroundtemplate{%
+%        \includegraphics[width=\paperwidth,height=\paperheight]{GraphicFiles/WhiteBackGround.jpg}%
+%        }% this background gets applied for now on in every frame unless otherwise specified,
+%        % e.g. by using the option [plain] in the frame environment
+%    }
+%
+%
+%    \mode<beamer>{
+%    \begin{frame}[noframenumbering]
+%        \frametitle{Data flow\\System level}
+%        \label{dataflowsystem}
+%        \input{ShortPages/systemdataflow}
+%    \end{frame}
+%    }
+%
+%    A data flow graph for the recommendation system that did not make it to the paper for lack of space.
+%    It shows the Software Engineer and the user as the two main agents external to the system.
+%    Paths 1 through 3 are used to prepare the system via machine learning.
+%    Path 4 addresses calculating a recommendation list.
+%    Path 5 has to do with computing MAP for system performance assessment.
+
+
+
+%    %----------------------------------------------------------------------------------------
+%    \begin{figure}[!htbp]
+%        \begin{center}
+%            \framebox{\includeslide[width=0.45\textwidth]{dataflowsystem}}
+%            \caption{Data flow at system level}
+%            \label{fig:dataflowsystem}
+%        \end{center}
+%    \end{figure}
+%    %----------------------------------------------------------------------------------------
+
+%    \mode<all>{
+%        \usebackgroundtemplate{%
+%          \includegraphics[width=\paperwidth,height=\paperheight]{GraphicFiles/MeetUpData4GoodBackground.png}%
+%        }% this background gets applied for now on in every frame unless otherwise specified,
+%        % e.g. by using the option [plain] in the frame environment
+%    }
+
+\end{document}

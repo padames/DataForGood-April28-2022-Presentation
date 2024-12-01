@@ -1,0 +1,34 @@
+% dataset.tex
+
+% \begin{table}
+\begin{center}
+\tiny
+    \begin{threeparttable}[b]
+    \renewcommand{\arraystretch}{1.25}
+    \caption{Statistics of data sets to make recommendations for donations to charities.}
+    \label{tab:description_datasets}
+    \centering
+    \begin{tabular}{lrrrclrr} % an extra empty column introduced at column number 6 from left to right for aesthetics
+        \toprule
+        Dataset & \parbox[r][][t]{4em}{\raggedleft No. of users} & \parbox[r][][t]{4em}{\raggedleft No. of items} & \parbox[r][][t]{4.5em}{\raggedleft No. of ratings} & & \parbox[l][][t]{4em}{\raggedright Rating density} & \parbox[r][][t]{5em}{\raggedleft Avg. ratings per user} & \parbox[r]{5em}{\raggedleft Avg. ratings per item} \\
+        \midrule
+        % MovieLens-100K\tnote{1} & 943 & 1 682 & 100 000 & & 6.30\% & 106.04 & 59.45\\
+        % MovieLens-1M\tnote{1} & 6 040 & 3 706 & 1 000 000 & & 4.47\% & 165.59 & 269.89\\
+        Donations-Dashboard\tnote{1} & 3 133 & 70 & 57 517 & & 26.31\% & 18.42 & 851.9 \\
+        Donations-1\tnote{2} & 9 397 & 2 711 & 24 417 & & 0.0958\% & 2.60 & 9.03 \\
+        Donations-2\tnote{2} & 1 264 083 & 165 842 & 24 174 672 & &0.0115\% & 19.12 & 145.76 \\
+        \bottomrule
+    \end{tabular}
+        \begin{tablenotes}
+            % \item [1] The MovieLens Datasets: History and Context \cite{MovieLens2016}.
+            \item [1] The Donation Dashboard data set: \href{http://dd.berkeley.edu/dataset/}{http://dd.berkeley.edu/dataset/}
+            \item [2] Data used for this research.
+        \end{tablenotes}
+    \end{threeparttable}
+\end{center}
+% \end{table}
+
+\small
+\begin{block}{}
+    Note the sparsity in rating density\footnote{The ratings per user per item} of the Donations-2 data set.
+\end{block}

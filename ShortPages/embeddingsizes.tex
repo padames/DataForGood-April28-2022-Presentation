@@ -1,0 +1,30 @@
+% embeddingsizes.tex
+
+\begin{figure}
+    \scriptsize
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[mapfigs]
+        \addplot[color=black,mark=diamond]
+            coordinates {
+            (3, 18.116666666666678)
+            (5, 14.00277499999999)
+            (7, 11.291706065759638)
+            (9, 9.59428318185556)
+            (11, 8.47514979493673)
+            };\label{t3}
+        \addplot[color=black, mark=triangle*]
+            coordinates {
+            (3, 16.953333333333323)
+            (5, 13.151865186518658)
+            (7, 10.679988586545726)
+            (9, 9.030561344812489)
+            (11, 7.953089315970777)
+            };\label{t4}
+        \node [draw,fill=white] at (rel axis cs: 0.732,0.762) {\shortstack[l]{
+            \ref{t4} {\scriptsize scat/nc/256} \\
+            \ref{t3} {\scriptsize scat/nc/512} }};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{\scriptsize Effect of the size of the cause embedding vectors on MAP at various values of top k for samples of 10,000 users. Key: scat=subcategories of causes used to compute features, nc=no feature for country of user, 256=embedding size, 512=embedding size.}
+\end{figure}

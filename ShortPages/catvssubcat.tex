@@ -1,0 +1,27 @@
+% catvssubcat.tex
+
+
+\begin{figure}[htbp!]
+    \scriptsize
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[mapfigs]
+        \addplot[color=black, mark=pentagon]
+            coordinates {
+            (3,25.78)(5,19.93)(7,16.02)(9,13.49)(11,11.97)
+            };\label{plot:cat}
+        \addplot[color=black, mark=triangle*]
+            coordinates {
+            (3, 16.953333333333323)
+            (5, 13.151865186518658)
+            (7, 10.679988586545726)
+            (9, 9.030561344812489)
+            (11, 7.953089315970777)
+            };\label{plot:scat}
+        \node [draw,fill=white] at (rel axis cs: 0.732,0.762) {\shortstack[l]{
+            \ref{plot:cat} {\scriptsize cat/nc/256} \\
+            \ref{plot:scat} {\scriptsize scat/nc/256} }};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{\scriptsize Effect of using categories or subcategories on MAP at different top k values for samples of 10,000 users. Key: cat=categories for feature computation, scat= subcategories instead of categories for feature computation, nc=no feature for country of user, 256=size of the cause embedding vectors.}
+\end{figure}

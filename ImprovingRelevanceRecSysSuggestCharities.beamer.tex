@@ -1,0 +1,10 @@
+%%% Compile with LuaLaTeX and TeXLive for best results
+\documentclass[	ignorenonframetext,%
+		 		boxes,%
+				xcolor=dvipsnames,%
+				14pt]{beamer}
+\usepackage{multimedia}
+\def\beamerforarticle{y} % set to y if creating a presentation for inclusion in handouts, n otherwise
+% the snm file has to be edited for the article to be generated correctly in a separate process
+%\def\beamerforarticle{n} % set to nH if creating a stand alone presentation with real animations
+\input{main}

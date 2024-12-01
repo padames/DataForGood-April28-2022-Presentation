@@ -1,0 +1,589 @@
+%File to keep the new commands of general use by other documents
+
+\usepackage{xspace}
+\usepackage{amsmath}%to refer to previously typed equations with original label. use: \tag{\ref{eq1}} instead of \label{xyz}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb} % https://tex.stackexchange.com/a/42620/36954
+\usepackage{pifont} % https://tex.stackexchange.com/a/42620/36954
+\usepackage{wasysym} % https://tex.stackexchange.com/q/3695/36954
+%\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[version=3]{mhchem} %chemical formulas made easy
+
+\usepackage[cdot,thickqspace,squaren,Gray,derivedinbase]{SIunits}
+\usepackage[nice]{nicefrac}
+\usepackage[loose,nice]{units}
+
+\usepackage{tikz}
+
+
+\tikzstyle{ipe stylesheet} = [
+  ipe import,
+  even odd rule,
+  line join=round,
+  line cap=butt,
+  ipe pen normal/.style={line width=0.4},
+  ipe pen heavier/.style={line width=0.8},
+  ipe pen fat/.style={line width=1.2},
+  ipe pen ultrafat/.style={line width=2},
+  ipe pen normal,
+  ipe mark normal/.style={ipe mark scale=3},
+  ipe mark large/.style={ipe mark scale=5},
+  ipe mark small/.style={ipe mark scale=2},
+  ipe mark tiny/.style={ipe mark scale=1.1},
+  ipe mark normal,
+  /pgf/arrow keys/.cd,
+  ipe arrow normal/.style={scale=7},
+  ipe arrow large/.style={scale=10},
+  ipe arrow small/.style={scale=5},
+  ipe arrow tiny/.style={scale=3},
+  ipe arrow normal,
+  /tikz/.cd,
+  ipe arrows, % update arrows
+  <->/.tip = ipe normal,
+  ipe dash normal/.style={dash pattern=},
+  ipe dash dashed/.style={dash pattern=on 4bp off 4bp},
+  ipe dash dotted/.style={dash pattern=on 1bp off 3bp},
+  ipe dash dash dotted/.style={dash pattern=on 4bp off 2bp on 1bp off 2bp},
+  ipe dash dash dot dotted/.style={dash pattern=on 4bp off 2bp on 1bp off 2bp on 1bp off 2bp},
+  ipe dash normal,
+  ipe node/.append style={font=\normalsize},
+  ipe stretch normal/.style={ipe node stretch=1},
+  ipe stretch normal,
+  ipe opacity 10/.style={opacity=0.1},
+  ipe opacity 30/.style={opacity=0.3},
+  ipe opacity 50/.style={opacity=0.5},
+  ipe opacity 75/.style={opacity=0.75},
+  ipe opacity opaque/.style={opacity=1},
+  ipe opacity opaque,
+]
+% \definecolor{red}{rgb}{1,0,0}
+% \definecolor{green}{rgb}{0,1,0}
+% \definecolor{blue}{rgb}{0,0,1}
+% \definecolor{yellow}{rgb}{1,1,0}
+% \definecolor{orange}{rgb}{1,0.647,0}
+% \definecolor{gold}{rgb}{1,0.843,0}
+% \definecolor{purple}{rgb}{0.627,0.125,0.941}
+% \definecolor{gray}{rgb}{0.745,0.745,0.745}
+% \definecolor{brown}{rgb}{0.647,0.165,0.165}
+% \definecolor{navy}{rgb}{0,0,0.502}
+% \definecolor{pink}{rgb}{1,0.753,0.796}
+% \definecolor{seagreen}{rgb}{0.18,0.545,0.341}
+% \definecolor{turquoise}{rgb}{0.251,0.878,0.816}
+% \definecolor{violet}{rgb}{0.933,0.51,0.933}
+% \definecolor{darkblue}{rgb}{0,0,0.545}
+% \definecolor{darkcyan}{rgb}{0,0.545,0.545}
+% \definecolor{darkgray}{rgb}{0.663,0.663,0.663}
+% \definecolor{darkgreen}{rgb}{0,0.392,0}
+% \definecolor{darkmagenta}{rgb}{0.545,0,0.545}
+% \definecolor{darkorange}{rgb}{1,0.549,0}
+% \definecolor{darkred}{rgb}{0.545,0,0}
+% \definecolor{lightblue}{rgb}{0.678,0.847,0.902}
+% \definecolor{lightcyan}{rgb}{0.878,1,1}
+% \definecolor{lightgray}{rgb}{0.827,0.827,0.827}
+% \definecolor{lightgreen}{rgb}{0.565,0.933,0.565}
+% \definecolor{lightyellow}{rgb}{1,1,0.878}
+% \definecolor{black}{rgb}{0,0,0}
+% \definecolor{white}{rgb}{1,1,1}
+
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Formating commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\DeclareRobustCommand{\myind}[1][2][3]{%
+%	{{#1}!{\textemdash #2}!{\textemdash #3}}
+%}
+\DeclareRobustCommand{\refx}[2]{%
+\mbox{\S\ref{#1}.\ref{#2}}%
+}
+
+\DeclareRobustCommand{\codelike}[1]{%
+\footnotesize{\texttt{ #1 }}%
+\normalsize{}%
+}
+
+\DeclareRobustCommand{\code}[1]{%
+%{\ttfamily\bfseries #1 }%
+{\ttfamily\bfseries #1\xspace }%
+}
+
+% EXAMPLES for the following four formatting commands
+% $\mathrm{F}\lowerNum{3,j}$, A\lowerText{b,i}, $\mathrm{F}\raiseNum{(3,j)}$, A\raiseText{(b,i)}
+
+%As a number within an equation
+\DeclareRobustCommand{\raiseNum}[1]{%
+\ensuremath{^{^{_{#1}}}}
+}
+
+\DeclareRobustCommand{\raiseText}[1]{%
+\raiseNum{\mathrm{#1}}
+}
+
+\DeclareRobustCommand{\hi}[1]{%
+\ensuremath{{\scriptstyle ^{#1}}}%
+}
+
+%As text stand alone
+%\DeclareRobustCommand{\raiseText}[1]{%
+%\mbox{$^{^{_{\mathrm{#1}}}}$}
+%}
+
+\DeclareRobustCommand{\raiseNumText}[1]{%
+\raiseText{#1}
+}
+
+%As text within an equation
+%\DeclareRobustCommand{\raiseNumText}[1]{%
+%^{^{_{\mathrm{#1}}}}
+%}
+
+
+%As a number within an equation
+%\DeclareRobustCommand{\lo}[1]{%
+%\ensuremath{_{_{^{#1}}}}
+%}
+\DeclareRobustCommand{\lo}[1]{%
+\ensuremath{{\scriptstyle _{#1}}}
+}
+
+%As text stand alone
+\DeclareRobustCommand{\lowerText}[1]{%
+\lo{\mathrm{#1}}
+}
+
+%As text stand alone
+%\DeclareRobustCommand{\lowerText}[1]{%
+%\mbox{$_{_{^{\mathrm{#1}}}}$}
+%}
+
+
+%As text within an equation
+%\DeclareRobustCommand{\lowerNumText}[1]{%
+%{_{_{^{\mathrm{#1}}}}}
+%}
+
+%As text within an equation
+\DeclareRobustCommand{\lowerNumText}[1]{%
+\lowerText{#1}
+}
+
+% Do not use the following macros... use instead \unit and \nicefrac from their respective packages (see file \usepackage statements):
+
+%Alternate unit set with brackets and scriptsize font
+\DeclareRobustCommand{\unitAlt}[1]{%
+{\scriptsize $\left[{#1}\right]$}
+}
+
+\DeclareRobustCommand{\units}[1]{%
+\,\mathrm{{#1}}
+}
+% EXAMPLE: To be used within a math expression: $569.7\units{kPa}$
+
+
+%\DeclareRobustCommand{\bf}[1]{{\bfseries #1}}
+%\DeclareRobustCommand{\it}[1]{{\itshape #1}}
+%\newcomamnd{\emf}[1]{\emph{ #1 }}
+
+\DeclareRobustCommand{\Lg}[1]{%
+\ensuremath{{\displaystyle {#1}}}%
+}
+
+
+\DeclareRobustCommand{\sm}[1]{%
+\ensuremath{{\scriptstyle {#1}}}%
+}
+
+
+\DeclareRobustCommand{\Sm}[1]{%
+\ensuremath{{\scriptscriptstyle {#1}}}%
+}
+
+\DeclareRobustCommand{\Txsm}[1]{%
+\ensuremath{{\scriptscriptstyle\mathrm{#1}}}%
+}
+
+% inline python code color box
+\DeclareRobustCommand{\pptex}[1]{%
+	{\color{NavyBlue}
+		\texttt{#1}
+	}
+}
+
+
+% stand alone python code color box
+\DeclareRobustCommand{\ptex}[1]{%
+\fcolorbox{LimeGreen}{GreenYellow}
+	{
+		{\color{NavyBlue}
+			\texttt{#1}
+		}
+	}
+}
+
+\DeclareMathOperator{\dis}{d}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Abbreviations for units
+% 1. Try to keep capialization of the first letter as consistent with writing convention as possible.
+% 2. Try to capitalize every other letter that begins a new word.
+% 3. Keep the abbreviation together, no hyphenaion or splitting across lines
+% 4. To be used within formulas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\DeclareRobustCommand{\vector}[1]{%
+\ensuremath{\boldsymbol{\mathit{#1}}}%
+}
+
+%VOLUME:
+%\DeclareRobustCommand{\MCub}{\ensuremath\mathrm{m}\raiseNum{3}}
+\DeclareRobustCommand{\MCub}[1]{\ensuremath{\unit[#1]{m}\text{\textthreesuperior}}}
+
+
+%\DeclareRobustCommand{\FtCub}{\ensuremath\mathrm{ft}\raiseNum{3}}
+\DeclareRobustCommand{\FtCub}[1]{\ensuremath{\unit[#1]{ft}\text{\textthreesuperior}}}
+
+% DENSITY:
+%\DeclareRobustCommand{\kgPerMCubFrac}{\tfrac{\mathrm{kg}}{\mathrm{m}\raiseNum{3}}}
+\DeclareRobustCommand{\kgPerMCubFrac}[1]{\ensuremath{\unitfrac[#1]{kg}{\MCub{}}}}
+\DeclareRobustCommand{\kgPerMCub}{{\mathrm{kg}}/{\mathrm{m}\raiseNum{3}}}
+\DeclareRobustCommand{\kgpermcub}{{\textstyle{}^{\mathrm{kg}}}\!/\!{\textstyle{}_{\mathrm{m}\raiseNum{3}}}}
+%\DeclareRobustCommand{\lbPerFtCubFrac}{\tfrac{\mathrm{lb}}{\mathrm{ft}\raiseNum{3}}}
+\DeclareRobustCommand{\lbPerFtCubFrac}[1]{\ensuremath{\unitfrac[#1]{lb}{\FtCub{}}}}
+\DeclareRobustCommand{\lbPerFtCub}{{\mathrm{lb}}/{\mathrm{ft}\raiseNum{3}}}
+
+%SPECIFIC GRAVITY
+\DeclareRobustCommand{\DegAPI}{\ensuremath{{}^{\circ}\mathrm{API}}}
+
+% VISCOSITY:
+\DeclareRobustCommand{\cP}{{\mathrm{cP}}}
+\DeclareRobustCommand{\mPaSec}{{\mathrm{mPa}}\cdot{\mathrm{s}}}
+
+% LENGTH:
+\DeclareRobustCommand{\cM}{\ensuremath{\mathrm{cm}}}
+\DeclareRobustCommand{\inch}{\ensuremath{\mathrm{inch}}}
+\DeclareRobustCommand{\m}{{\ensuremath{\mathrm{m}}}}
+\DeclareRobustCommand{\ft}{\ensuremath{\mathrm{ft}}}
+\DeclareRobustCommand{\mM}{\ensuremath{\mathrm{mm}}}
+\DeclareRobustCommand{\km}{\ensuremath{\mathrm{km}}}
+
+
+% VELOCITY:
+%\DeclareRobustCommand{\mPerSecFrac}{\tfrac{\mathrm{m}}{\mathrm{s}}}
+\DeclareRobustCommand{\mPerSec}{{\mathrm{m}}/{\mathrm{s}}}
+\DeclareRobustCommand{\mPerSecFrac}[1]{\ensuremath{\unitfrac[#1]{m}{s}}}
+\DeclareRobustCommand{\mpersec}{{{\textstyle}^{\mathrm{m}}}\negmedspace{\textstyle/}\!{{\textstyle}_{\mathrm{s}}}}
+\DeclareRobustCommand{\ftPerSecFrac}{\tfrac{\mathrm{ft}}{\mathrm{s}}}
+\DeclareRobustCommand{\ftPerSec}{{\mathrm{ft}}/{\mathrm{s}}}
+
+% SURFACE TENSION:
+%\DeclareRobustCommand{\dynePerCmFrac}{\tfrac{\mathrm{dynes}}{\mathrm{cm}}}
+\DeclareRobustCommand{\dynePerCmFrac}[1]{\ensuremath{\unitfrac[#1]{dynes}{cm}}}
+\DeclareRobustCommand{\dynePerCm}{{\mathrm{dynes}}/{\mathrm{cm}}}
+%\DeclareRobustCommand{\mNPerMFrac}{\tfrac{\mathrm{mN}}{\mathrm{m}}}
+\DeclareRobustCommand{\mNPerMFrac}[1]{\ensuremath{\unitfrac[#1]{mN}{m}}}
+\DeclareRobustCommand{\mNPerM}{{\mathrm{mN}}/{\mathrm{m}}}
+
+% PRESSURE:
+\DeclareRobustCommand{\MPaa}{{\ensuremath{\mathrm{MPaa}}}}
+\DeclareRobustCommand{\kPaa}{{\ensuremath{\mathrm{kPaa}}}}
+\DeclareRobustCommand{\bara}{\ensuremath{\mathrm{bara}}}
+\DeclareRobustCommand{\psia}{\ensuremath{\mathrm{psia}}}
+\DeclareRobustCommand{\NoverMsq}{\ensuremath{\frac{N}{m^2}}}
+\DeclareRobustCommand{\novermsq}{\ensuremath{\text{\scriptsize \raisebox{0.5ex}{N}\!$/$\raisebox{-0.1ex}{m$^{2}$}\normalsize}}}
+
+
+% PRESSURE DIFFERENCE:
+\DeclareRobustCommand{\MPa}{{\ensuremath{\mathrm{MPa}}}}
+\DeclareRobustCommand{\kPa}{{\ensuremath{\mathrm{kPa}}}}
+\DeclareRobustCommand{\Bar}{\ensuremath{\mathrm{bar}}}
+% \DeclareRobustCommand{\psi}{\ensuremath{\mathrm{psi}}}
+
+
+% PRESSURE GRADIENT:
+\DeclareRobustCommand{\MPaPerMFrac}{\tfrac{\mathrm{MPa}}{\mathrm{m}}}
+\DeclareRobustCommand{\MPaPerM}{\mathrm{MPa}/{\mathrm{m}}}
+\DeclareRobustCommand{\kPaPerMFrac}{\tfrac{\mathrm{kPa}}{\mathrm{m}}}
+\DeclareRobustCommand{\kPaPerM}{{\mathrm{kPa}}/{\mathrm{m}}}
+\DeclareRobustCommand{\kPaPerkMFrac}{\tfrac{\mathrm{kPa}}{\mathrm{km}}}
+\DeclareRobustCommand{\kPaPerkM}{{\mathrm{kPa}}/{\mathrm{km}}}
+\DeclareRobustCommand{\PaPerMFrac}{\tfrac{\mathrm{Pa}}{\mathrm{m}}}
+\DeclareRobustCommand{\PaPerM}{{\mathrm{Pa}}/{\mathrm{m}}}
+\DeclareRobustCommand{\paperm}{{{\textstyle}^{\mathrm{Pa}}}\negmedspace{\textstyle/}\!{{\textstyle}_{\mathrm{m}}}}
+\DeclareRobustCommand{\barPerMFrac}{\tfrac{\mathrm{bar}}{\mathrm{m}}}
+\DeclareRobustCommand{\barPerM}{{\mathrm{bar}}/{\mathrm{m}}}
+\DeclareRobustCommand{\psiPerFtFrac}{\tfrac{\mathrm{psi}}{\mathrm{ft}}}
+\DeclareRobustCommand{\psiPerFt}{{\mathrm{psi}}/{\mathrm{ft}}}
+\DeclareRobustCommand{\psiPerMileFrac}{\tfrac{\mathrm{psi}}{\mathrm{mile}}}
+\DeclareRobustCommand{\psiPerMile}{{\mathrm{psi}}/{\mathrm{mile}}}
+
+
+% TEMPERATURE:
+\DeclareRobustCommand{\gradoC}{{\ensuremath{{}^{\circ}\mathrm{C}}}}
+\DeclareRobustCommand{\gradoF}{{\ensuremath{{}^{\circ}\mathrm{F}}}}
+\DeclareRobustCommand{\gradoK}{{\ensuremath{{}^{\circ}\mathrm{K}}}}
+\DeclareRobustCommand{\gradoR}{{\ensuremath{{}^{\circ}\mathrm{R}}}}
+
+% ANGLES:
+%\DeclareRobustCommand{\degree}{{{}^{\circ}}} %already defined
+\DeclareRobustCommand{\grado}{{{}^{\circ}}} %spanish guarantees no collisions
+\DeclareRobustCommand{\rad}{\ensuremath{\mathrm{rad}}}
+
+%VOLUMETRIC FLOW RATES
+\DeclareRobustCommand{\MMscfpd}{\ensuremath{\mathrm{MMscfpd}}}
+\DeclareRobustCommand{\Kscfpd}{\ensuremath{\mathrm{Mscfpd}}}
+\DeclareRobustCommand{\scfpd}{\ensuremath{\mathrm{scfpd}}}
+\DeclareRobustCommand{\MMscmpd}{\ensuremath{\mathrm{e6sm}^{3}\mathrm{d}}}
+\DeclareRobustCommand{\Kscmpd}{\ensuremath{\mathrm{e3sm}^{3}\mathrm{d}}}
+\DeclareRobustCommand{\scmpd}{\ensuremath{\mathrm{sm}^{3}/\mathrm{d}}}
+\DeclareRobustCommand{\Kscmph}{\ensuremath{\mathrm{e3sm}^{3}\mathrm{h}}}
+\DeclareRobustCommand{\cmph}{\ensuremath{\mathrm{m}^{3}/\mathrm{h}}}
+
+%MASS FLOW RATES
+\DeclareRobustCommand{\kgph}{\ensuremath{\mathrm{Kg}/\mathrm{h}}}
+
+%VOLUME RATIOS
+\DeclareRobustCommand{\MCubPerMCub}%
+{\ensuremath{\tfrac{\mathrm{m}\raiseNum{3}}{\mathrm{m}\raiseNum{3}}}}
+
+\DeclareRobustCommand{\mcubpermcub}%
+{\ensuremath{\mathrm{m}\raiseNum{3}/\mathrm{m}\raiseNum{3}}}
+
+\DeclareRobustCommand{\MCubPerKMCub}%
+{\ensuremath{\tfrac{\mathrm{m}\raiseNum{3}}{10^{3}\mathrm{m}\raiseNum{3}}}}
+
+\DeclareRobustCommand{\MCubPerMMMCub}%
+{\ensuremath{\mathrm{m}\raiseNum{3}/10^{6}\mathrm{m}\raiseNum{3}}}
+
+\DeclareRobustCommand{\MCubPerMMMCubFrac}%
+{\ensuremath{\tfrac{\mathrm{m}\raiseNum{3}}{10^{6}\mathrm{m}\raiseNum{3}}}}
+
+\DeclareRobustCommand{\STBPerKscf}%
+{\ensuremath{\mathrm{STBMscf}}}
+
+\DeclareRobustCommand{\STBPerMMscf}%
+{\ensuremath{\mathrm{STBMMscf}}}
+
+
+% Other abbreviations here
+
+\DeclareRobustCommand{\etal}{\emph{et al.\xspace}}
+
+\DeclareRobustCommand{\TM}{$^{^{_{\mathrm{TM}}}}$\@}
+\DeclareRobustCommand{\CR}{$^{\copyright{}}$\@}
+
+\DeclareRobustCommand{\blue}{\color{blue}}
+\DeclareRobustCommand{\red}{\color{red}}
+
+\DeclareRobustCommand{\R}{{\sffamily R\@\normalfont}\xspace}
+
+%\DeclareRobustCommand{\matlab}{\sffamily MATLAB$^{\text{\textregistered}}$\@\normalfont}
+\DeclareRobustCommand{\matlab}{{\sffamily MATLAB\@\normalfont}\xspace}
+
+%\DeclareRobustCommand{\olga}{\normalfont\sffamily\bfseries OLGA$^{\text{\textregistered}}$\@\normalfont\xspace}}
+\DeclareRobustCommand{\olga}{{\normalfont\sffamily\bfseries OLGA\@\normalfont}\xspace}
+\DeclareRobustCommand{\olgastwophase}{{\normalfont\sffamily\bfseries OLGAS-2\- Phase\@\normalfont}\xspace}
+\DeclareRobustCommand{\olgasthreephase}{{\normalfont\sffamily\bfseries OLGAS-3 Phase\@\normalfont}\xspace}
+\DeclareRobustCommand{\olgas}{{\normalfont\sffamily\bfseries OLGAS \@\normalfont}\xspace}
+\DeclareRobustCommand{\olgasninetytwo}{{\normalfont\sffamily\bfseries\mbox{OLGAS-92}\@\normalfont}\xspace}
+
+%\DeclareRobustCommand{\pipeflo}{\normalfont\sffamily\bfseries PIPEFLO$^{\text{\textregistered}}$\@\normalfont}
+%\DeclareRobustCommand{\wellflo}{\normalfont\sffamily\bfseries WELLFLO$^{\text{\textregistered}}$\@\normalfont}
+%\DeclareRobustCommand{\forgas}{\normalfont\sffamily\bfseries FORGAS$^{\text{\textregistered}}$\@\normalfont}
+% After talking to Kelsey on May 10, 2010 Our product names are not registered trademarks
+\DeclareRobustCommand{\pipeflo}{{\normalfont\sffamily\bfseries PIPEFLO\@\normalfont}\xspace}
+\DeclareRobustCommand{\wellflo}{{\normalfont\sffamily\bfseries WELLFLO\@\normalfont}\xspace}
+\DeclareRobustCommand{\forgas}{{\normalfont\sffamily\bfseries FORGAS\@\normalfont}\xspace}
+
+\DeclareRobustCommand{\neotec}{{\normalfont\sffamily\bfseries NEOTEC\@\normalfont}\xspace}
+
+\DeclareRobustCommand{\google}{{\normalfont\textsc{Google\@}\normalfont}\xspace}
+
+
+\DeclareRobustCommand{\mmflo}{{\normalfont\sffamily\bfseries MMFLO\@\normalfont}\xspace}
+\DeclareRobustCommand{\seqmmflo}{{\normalfont\sffamily\bfseries SeqMMFLO\@\normalfont}\xspace}
+\DeclareRobustCommand{\fpg}{{\normalfont\sffamily\bfseries FPG\@\normalfont}\xspace}
+
+\DeclareRobustCommand{\acronym}[1]{{\normalfont\sffamily #1\@\normalfont}\xspace}
+\DeclareRobustCommand{\acronymtwo}[1]{{\bfseries\sffamily #1\@\normalfont}}
+
+%%%%%%% Use this version for seamless management of the space after the word
+\DeclareRobustCommand{\acr}[1]{\acronym{#1}}
+%%%%%%% Use this version for no space after the word
+\DeclareRobustCommand{\acrtwo}[1]{\acronymtwo{#1}}
+
+
+%This a good practice for creating acronyms:
+\DeclareRobustCommand{\dof}{%
+	\acr{DOF}
+}
+
+\DeclareRobustCommand{\jira}{%
+	\acrtwo{JIRA}
+}
+
+\DeclareRobustCommand{\cplusplus}{%
+C{\raisebox{0.3ex}{\scriptsize ++}}
+}
+
+% here applied to create new acronyms
+\DeclareRobustCommand{\mpd}{\acr{MPD}}
+\DeclareRobustCommand{\ubd}{\acr{UBD}}
+\DeclareRobustCommand{\tfs}{\acr{TFS}}
+
+\DeclareRobustCommand{\sptgroup}{\acr{SPT Group AS}}
+\DeclareRobustCommand{\sptgroupcanada}{\acr{SPT Group Canada Ltd.}}
+\DeclareRobustCommand{\sptgroupcanadaslb}{\acr{SPT Group Canada Ltd., a Schlumberger company}}
+
+\DeclareRobustCommand{\python}{\acr{python}}
+\DeclareRobustCommand{\pygme}{\acr{pyGME}}
+\DeclareRobustCommand{\matplotlib}{\acr{matplotlib}}
+\DeclareRobustCommand{\numpy}{\acr{numpy}}
+\DeclareRobustCommand{\scipy}{\acr{scipy}}
+
+
+\DeclareRobustCommand{\sumatrapdf}{\acr{SumatraPDF}} %sans seriff
+\DeclareRobustCommand{\sumatrapdftwo}{\acrtwo{SumatraPDF}} %bold
+
+\DeclareRobustCommand{\pipesim}{\acr{PIPESIM}}
+\DeclareRobustCommand{\pipesimtwo}{\acrtwo{PIPESIM}}
+
+\DeclareRobustCommand{\slb}{\acr{Schlumberger}}
+\DeclareRobustCommand{\slbtwo}{\acrtwo{Schlumberger}}
+
+\DeclareRobustCommand{\bhr}{\acr{BHR}}
+\DeclareRobustCommand{\bhrtwo}{\acrtwo{BHR}}
+
+
+\DeclareRobustCommand{\dpdl}%
+{\left( \dfrac{\mathrm{d}p}{\mathrm{d}l} \right)}
+
+\DeclareRobustCommand{\dPdL}%
+{\left( \nicefrac{\mathrm{d}p}{\mathrm{d}l} \right)}
+
+\DeclareRobustCommand{\dvdl}%
+{\left( \dfrac{\mathrm{d}v}{\mathrm{d}l} \right)}
+
+\DeclareRobustCommand{\dfdl}%
+{\left( \dfrac{\mathrm{d}F}{\mathrm{d}l} \right)}
+
+\DeclareRobustCommand{\dFdL}%
+{\left( \nicefrac{\mathrm{d}F}{\mathrm{d}l} \right)}
+
+
+\DeclareRobustCommand{\tdpdl}%
+{\left( \tfrac{\mathrm{d}p}{\mathrm{d}l} \right)}
+% NOTE: use $\smash{\tdpdl}$ if you want to make the text line to preserve the default inter line horizontal space in the paragraph. (PEA: Oct 2, 2009)
+
+
+\DeclareRobustCommand{\dAnydl}[1]{%
+{\left( \dfrac{\mathrm{d}{\ensuremath{#1}}}{\mathrm{d}l} \right)}
+}
+
+
+%\DeclareRobustCommand{\dNumdDen}[2]{%
+%{\left( \dfrac{\mathrm{d}{\ensuremath{#1}}}{\mathrm{d}{\ensuremath{#2}}}\right)}
+%}
+
+\DeclareRobustCommand{\dNumdDen}[2]{%
+{\dfrac{\mathrm{d}{\ensuremath{#1}}}{\mathrm{d}{\ensuremath{#2}}}}
+}
+
+\DeclareRobustCommand{\sinTheta}%
+{\ensuremath{\mathrm{sin}\,\theta}}
+
+\DeclareRobustCommand{\cosTheta}%
+{\ensuremath{\mathrm{cos}\,\theta}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SPECIAL LIST FOMATTING
+%  namelist generates a list with an item width of
+%  your choice; form: \begin{namelist}{width}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareRobustCommand{\namelistlabel}[1]{\mbox{#1}\hfill}
+\newenvironment{namelist}[1]{%
+\begin{list}{}
+	{
+		\let\makelabel\namelistlabel
+		\settowidth{\labelwidth}{#1}
+		\setlength{\leftmargin}{1.1\labelwidth}
+	}
+}{%
+\end{list}}
+
+%Example:
+%\vbox{
+%\begin{namelist}{Numerical dispersionXX} % second argument is the longest list label
+%
+%\item[{\bf Discontinuities}] Some discontinuities in pressure gradient are acceptable even for the simultaneous solver since it runs XYZ smoothly.
+%
+%\item[{\bf Downward flow}] From looking at the downward XYZ and WXY results it became apparent that any steep downward inclined flow is quite challenging to describe because the flow patterns and gradient surfaces showed discontinuities and some apparent incosistencies.
+%\end{namelist}
+%}
+
+\DeclareRobustCommand{\namelistlabelR}[1]{\hfill\mbox{#1}}
+\newenvironment{namelistR}[1]{%
+\begin{list}{}
+	{
+		\let\makelabel\namelistlabel
+		\settowidth{\labelwidth}{#1}
+		\setlength{\rightmargin}{1.1\labelwidth}
+	}
+}{%
+\end{list}}
+
+
+\DeclareRobustCommand{\namelistlabelL}[1]{\hfill\mbox{#1}}
+\newenvironment{namelistLong}[1]{%
+\setlength{\parsep}{20pt}
+\begin{list}{}
+	{
+		\let\makelabel\namelistlabel
+		\settowidth{\labelwidth}{#1}
+		\setlength{\rightmargin}{1.1\labelwidth}
+	}
+}{%
+\end{list}}
+
+
+% Here is how you make the list compact:
+\newenvironment{enumeratetight}
+{\begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}
+{\end{enumerate}}
+
+%% For circled numbers (see https://tex.stackexchange.com/questions/7032/good-way-to-make-textcircled-numbers#7045)
+%\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+%            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+%% From: https://tex.stackexchange.com/a/72814/36954
+% tkiz ball item
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[	circle,ball color=green, shade,
+ 					color=white,
+ 					inner sep=1.2pt] (char) {\tiny #1};}}
+
+% tkiz rounded item
+\newcommand*\rounded[1]{\tikz[baseline=(char.base)]{
+            \node[draw=none,ball color=green, shade,
+ color=white,
+ rounded corners=3.5pt, inner sep=2.5pt] (char) {\scriptsize\bfseries #1};}}
+
+
+%% https://tex.stackexchange.com/a/34929/36954
+\def\Put(#1,#2)#3{\leavevmode\makebox(0,0){\put(#1,#2){#3}}}
+
+
+%% https://tex.stackexchange.com/a/42620/36954
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}

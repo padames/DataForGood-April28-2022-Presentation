@@ -1,0 +1,31 @@
+%recSysAlgorithms2.tex
+
+    \begin{columns}[onlytextwidth]
+
+        \begin{column}{0.5\textwidth}
+            \small
+            \begin{enumerate}
+            \item<1   >\alert<1>{ Recommendation algorithms implement these main tasks}
+            \item<2   >\alert<2>{ A definition of similarity to create neighbourhoods}
+            \item<3   >\alert<3>{ Rating prediction}
+            \item<4   >\alert<4>{ To produce a ranked list of items for the target user}
+            \end{enumerate}
+        \end{column}
+
+        \begin{column}{0.5\textwidth}
+            \small
+            \only<2>{\begin{itemize}
+                        \item<2> Item-based CF: Similar items to the ones rated by the target user
+                        \item<2> User-based CF: Similar users that have rated the same items as the target user
+                    \end{itemize}}
+            \only<3>{\begin{itemize}
+                        \item<3> Item-based CF: User-similarity weighted ratings to unseen item
+                        \item<3> User-based CF: Average target user rating corrected by user-similarity weighted rating to unseen item
+                    \end{itemize}}
+            \only<4>{\begin{itemize}
+                    \item<4> Descending order from top predicted rated item and length $k$
+                    \item<4> Top-$k$ recommendations
+                \end{itemize}}
+        \end{column}
+
+ ​  \end{columns}

@@ -1,0 +1,51 @@
+
+	% \TPGrid[<bh>,<bv>]{<nh>}{<nv>}
+	% creates a grid such that:
+	% <nh> x \TPHorizModule + 2<bh> = \paperwidth
+	% <nv> x \TPVertModule + 2<bv> = \paperheight
+	% The paper has a border <bh>,<bv> around it
+	% and a grid of <nh> x <nv> modules
+	\TPGrid[0.2cm,1.25cm]	{20}	% 20 modules horizontally
+    						{5}		% 5 modules vertically
+
+%	\textblockcolour{blue!10}
+	\begin{textblock}{19}(0,0.2) %\begin{textblock}{WIDTH}(XCOORDINATE,YCOORDINATE)
+	\begin{minipage}[c][1.0\TPVertModule]{\textwidth}
+	\centering\textcolor{headings}{\large\bfseries Improving Relevance in a Recommendation System to Suggest Charities}
+	\end{minipage}
+	\end{textblock}
+
+% 	\begin{textblock}{10}(0,2) %coordinates to locate title where background has room for it
+%         \begin{minipage}[c][0.5\TPVertModule]{\textwidth}
+%             \centering\textcolor{headings}{\normalsize\bfseries}
+%         \end{minipage}
+% 	\end{textblock}
+
+	\begin{textblock}{10}(0,2.55)
+	\centering
+	\begin{tabular}{ll}
+	\textcolor{blue!30!black}{Pablo Adames,} & \hspace{-0.25cm}\textcolor{blue!30!black}{\small U. of Calgary, now with CP Railway IS}\\
+	\textcolor{blue!30!black}{ Sourabh Mokhasi,} & \hspace{-0.25cm}\textcolor{blue!30!black}{\small U. of Calgary, now with AWS}
+	\end{tabular}
+	\end{textblock}
+
+	\begin{textblock}{7}(0,4.5)
+	\centering
+	\textcolor{black}{\\\bfseries\small Data for Good, April 28, 2022}
+	\end{textblock}
+
+	\begin{textblock}{20}(6.5,3.90)
+	\centering
+        \includegraphics[scale=0.03]{GraphicFiles/benevity1.png}
+	\end{textblock}
+
+    \begin{textblock}{20}(6.4,4.50)
+    \centering
+    \includegraphics[scale=0.07]{GraphicFiles/Data4GoodLogo.png}
+    \end{textblock}
+
+    \begin{textblock}{20}(6.6,5.2)
+    \centering
+    \includegraphics[scale=0.5]{GraphicFiles/MeetUpLogo.png}
+    \end{textblock}
+

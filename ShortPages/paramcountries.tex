@@ -1,0 +1,27 @@
+% paramcountries.tex
+
+\begin{figure}
+    \scriptsize
+    \centering
+    \begin{tikzpicture}
+    \pgfplotsset{set layers}
+    \begin{axis}[cntyleft]
+        \addplot[color=black, mark=*]
+             coordinates {
+                 (1, 47)
+                 (20, 41)
+                 (40, 35)
+                 (60,  29)
+                 (80,  21)
+                 (100, 15)
+                 (150, 9)
+                 (200, 8)
+                 (300, 6)
+                 (400, 6)
+                 (500, 4)
+            };
+        \label{pgfplots:usrcnty}
+    \end{axis}
+    \end{tikzpicture}
+    \caption{\scriptsize Number of user countries in the data set as a function of the minimum number of donations per user during the 2-year interval in the donations-2 data set.}
+\end{figure}

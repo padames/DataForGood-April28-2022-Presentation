@@ -1,0 +1,39 @@
+% useractivity.tex
+
+\begin{figure}
+    \scriptsize
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[mapfigs]
+        \addplot[color=black, mark=square]
+            coordinates {
+            (3, 32.098888888888893)
+            (5, 23.37503333333334)
+            (7, 18.06751700680272)
+            (9, 14.738761845437132)
+            (11, 12.52077956822629)
+            };\label{t1}
+        \addplot[color=black, mark=*]
+            coordinates {
+            (3, 31.682507920626996)
+            (5, 23.542875241715014)
+            (7, 18.568244121075825)
+            (9, 15.44195321111663)
+            (11, 13.247696436388826)
+            };\label{t5}
+        \addplot[color=black, mark=x]
+            coordinates {
+            (3, 15.30333333333334)
+            (5, 11.879900000000003)
+            (7, 09.523418367346936)
+            (9, 07.975152405917998)
+            (11, 06.909317192197705)
+            };\label{t7}
+        \node [draw,fill=white] at (rel axis cs: 0.732,0.762) {\shortstack[l]{
+            \ref{t7} {\scriptsize scat/1d/c/256} \\
+            \ref{t1} {\scriptsize scat/55d/c/256} \\
+            \ref{t5} {\scriptsize scat/100d/c/256} }};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{\scriptsize Effect of removing users with a minimum number of donations on MAP at various top k values for samples of 10,000 users. Key: scat= subcategories used for feature computation, c= country of the user as a feature, 1d=all users are included in the system, 55d=only users with 55 donations or more are included, 100d=only users with more than 100 donations are included.}
+\end{figure}

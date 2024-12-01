@@ -1,0 +1,54 @@
+% paramtransacsusers.tex
+
+\begin{figure}
+    \scriptsize
+    \centering
+    \begin{tikzpicture}
+    \pgfplotsset{set layers,
+        log y ticks with fixed point/.style={
+            yticklabel={
+                \pgfkeys{/pgf/fpu=true}
+                \pgfmathparse{exp(\tick)}%
+                \pgfmathprintnumber[fixed relative, precision=3]{\pgfmathresult}
+                \pgfkeys{/pgf/fpu=false}
+            }
+        }
+    }
+    \begin{axis}[donleft]
+        \addplot[color=black, mark=square]
+            coordinates {
+            (1, 23.685965)
+            (20, 20.114940)
+            (40, 17.988919)
+            (60, 15.876161)
+            (80, 11.343628)
+            (100, 10.067714)
+            (150, 6.414618)
+            (200, 4.764926)
+            (300, 3.003430)
+            (400, 1.988685)
+            (500, 1.456254)
+            };
+            \label{pgfplots:nt}
+    \end{axis}
+    %
+    \begin{semilogyaxis}[donlogright]
+        \addplot[color=black, mark=*, domain=1:1500]
+             coordinates {
+             (1, 1215.453)
+             (20, 252.239)
+             (40, 179.381)
+             (60, 135.338)
+             (80, 66.413)
+             (100, 51.967)
+             (150, 22.565)
+             (200, 13.240)
+             (300, 5.981)
+             (400, 3.007)
+             (500, 1.814)
+             };
+        \label{pgfplots:users}
+    \end{semilogyaxis}
+    \end{tikzpicture}
+    \caption{\scriptsize Number of transactions and number of users in the data set as a function of the minimum number of donations per user during the 2-year interval in the donations-2 data set.}
+\end{figure}
